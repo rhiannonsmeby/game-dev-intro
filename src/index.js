@@ -1,5 +1,6 @@
 import Paddle from './paddle.js';
 import InputHandler from './input.js';
+import Ball from './ball.js';
 
 // how to draw something on the canvas: 
 let canvas = document.getElementById("gameScreen");
@@ -22,6 +23,7 @@ const GAME_HEIGHT = 600;
 // ctx.fillRect(200,200,50,50);
 
 let paddle = new Paddle(GAME_WIDTH, GAME_HEIGHT);
+let ball = new Ball(GAME_WIDTH, GAME_HEIGHT);
 
 // instantiate input handler before the game loop
 new InputHandler(paddle);
@@ -44,14 +46,18 @@ function gameLoop(timestamp) {
     // everytime you redraw onto the canvas, what was previously on the canvas is
     // still there
     // we use clear rect to mitigate this
-    ctx.clearRect(0, 0, 800, 600);
+    ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
     // update our paddle
     paddle.update(deltaTime);
     paddle.draw(ctx);
+
+    //update our ball
+    ball.update(deltaTime);
+    ball.draw(ctx);
 
     // every time this runs it will say when the next frame is ready call this 
     // gameLoop again and pass it the time stamp
     requestAnimationFrame(gameLoop);
 }
 
-gameLoop();
+requestAnimationFrame(gameLoop);
