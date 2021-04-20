@@ -1,6 +1,8 @@
  export default class Paddle {
 
-    constructor(gameWidth, gameHeight) {
+    constructor(game) {
+        this.gameWidth = game.gameWidth;
+        
         this.width = 150;
         this.height = 20;
 
@@ -8,11 +10,11 @@
         this.speed = 0;
 
         this.position = {
-            x: (gameWidth - this.width) / 2,
+            x: (game.gameWidth - this.width) / 2,
             // we want to start the paddle at the bottom:
             // gameHeight - the height of the paddle - how much we want it off
             // the bottom: 10px here
-            y: gameHeight - this.height - 10,
+            y: game.gameHeight - this.height - 10,
         };
     }
 
